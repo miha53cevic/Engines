@@ -23,6 +23,9 @@ public:
 	virtual bool OnUserCreate() = 0;
 	virtual bool OnUserUpdate(sf::Time elapsed) = 0;
 
+	//Can override this
+	virtual void Event(sf::Event e) {}
+
 	int ScreenWidth() { return m_nScreenWidth; }
 	int ScreenHeight() { return m_nScreenHeight; }
 
@@ -33,6 +36,7 @@ public:
 
 	void Draw(sf::Drawable& l_drawable) { m_window.draw(l_drawable); }
 	void Draw(sf::Drawable& l_drawable, sf::Transform& l_transform) { m_window.draw(l_drawable, l_transform); }
+	void Draw(sf::VertexArray l_vertexArray) { m_window.draw(l_vertexArray); }
 
 	void setBackgroundColor(sf::Color l_color) { m_backgroundColor = l_color; }
 
@@ -80,6 +84,8 @@ public:
 			{
 				if (event.type == sf::Event::Closed)
 					m_bDone = true;
+
+				Event(event);
 			}
 
 			BeginDraw(m_backgroundColor);
