@@ -3,7 +3,7 @@
 #include <SFML/Window.hpp>
 #include <string>
 
-int map(int s, int a1, int a2, int b1, int b2)
+float map(float s, float a1, float a2, float b1, float b2)
 {
 	return b1 + ((s - a1) * (b2 - b1)) / (a2 - a1);
 }
