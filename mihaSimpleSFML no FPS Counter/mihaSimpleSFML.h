@@ -1,8 +1,59 @@
+/*
+// Author: Mihael Petricevic
+// Contact: miha53cevic@gmail.com
+//
+// Description:
+//		Simple SFML wrapper for easier usage
+//
+// Example usage:
+//		
+//	#include "mihaSimpleSFML.h"
+//	
+//	class demo : public mihaSimpleSFML
+//	{
+//	public:
+//		demo() {}
+//	
+//	private:
+//	
+//	protected:
+//		virtual bool OnUserCreate() override
+//		{
+//			return true;
+//		}
+//	
+//		virtual bool OnUserUpdate(sf::Time elapsed) override
+//		{	
+//			return true;
+//		}
+//	
+//	};
+//	
+//	int main()
+//	{
+//		demo app;
+//		app.Construct(1280, 720, L"demo app");
+//		app.Start();
+//	
+//		return 0;
+//	}
+*/
+
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <string>
 
+// PI CONSTANT
+const float PI = 3.141592;
+
+// Converts degress to radians
+float toRadian(float deg)
+{
+	return deg * (PI / 180);
+}
+
+// Maps values from one range to another
 float map(float s, float a1, float a2, float b1, float b2)
 {
 	return b1 + ((s - a1) * (b2 - b1)) / (a2 - a1);
