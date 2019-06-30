@@ -6,35 +6,35 @@
 //		Simple SFML wrapper for easier usage
 //
 // Example usage:
-//		
+//
 //	#include "mihaSimpleSFML.h"
-//	
+//
 //	class demo : public mihaSimpleSFML
 //	{
 //	public:
 //		demo() {}
-//	
+//
 //	private:
-//	
+//
 //	protected:
 //		virtual bool OnUserCreate() override
 //		{
 //			return true;
 //		}
-//	
+//
 //		virtual bool OnUserUpdate(sf::Time elapsed) override
-//		{	
+//		{
 //			return true;
 //		}
-//	
+//
 //	};
-//	
+//
 //	int main()
 //	{
 //		demo app;
 //		app.Construct(1280, 720, L"demo app");
 //		app.Start();
-//	
+//
 //		return 0;
 //	}
 */
@@ -43,9 +43,29 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <string>
+#include <random>
+
+// Random number generator in given range
+float fRandom(float first, float second)
+{
+	std::random_device rd;
+	std::default_random_engine generator(rd()); // rd() provides a random seed
+	std::uniform_real_distribution<float> distribution(first, second);
+
+	return distribution(generator);
+}
+
+int iRandom(int first, int second)
+{
+	std::random_device rd;
+	std::default_random_engine generator(rd()); // rd() provides a random seed
+	std::uniform_int_distribution<int> distribution(first, second);
+
+	return distribution(generator);
+}
 
 // PI CONSTANT
-const float PI = 3.141592;
+const float PI = 3.141592f;
 
 // Converts degress to radians
 float toRadian(float deg)
