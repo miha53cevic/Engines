@@ -73,5 +73,5 @@ void we::App::CheckEvents()
 	}
 }
 
-void we::App::ClearWindow()     { m_window.clear(m_clearColour);	}
+void we::App::ClearWindow()     { m_window.clear(m_clearColour);    }
 void we::App::DisplayWindow()   { m_window.display();               }
