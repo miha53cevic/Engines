@@ -48,11 +48,14 @@ void we::App::Run()
 	}
 }
 
-int we::App::ScreenWidth()					{ return m_screenSize.x; }
-int we::App::ScreenHeight()					{ return m_screenSize.y; }
+int we::App::ScreenWidth()					    { return m_screenSize.x; }
+int we::App::ScreenHeight()					    { return m_screenSize.y; }
 
-void we::App::setVSync(bool VSync)			{ m_VSync = VSync;		 }
-void we::App::setClearColour(sf::Color c)	{ m_clearColour = c;	 }
+sf::RenderWindow &we::App::getWindow()          { return m_window; }
+we::StateMachine &we::App::getStateMachine()    { return m_stateMachine; }
+
+void we::App::setVSync(bool VSync)			    { m_VSync = VSync;		 }
+void we::App::setClearColour(sf::Color c)	    { m_clearColour = c;	 }
 
 void we::App::CheckEvents()
 {

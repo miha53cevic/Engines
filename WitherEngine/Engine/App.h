@@ -7,35 +7,38 @@
 
 namespace we
 {
-	class App
-	{
-	public:
-		App();
+    class App
+    {
+    public:
+        App();
 
-		void CreateWindow(int ScreenWidth, int ScreenHeight, std::string Title);
-		void Run();
+        void CreateWindow(int ScreenWidth, int ScreenHeight, std::string Title);
+        void Run();
 
-		int ScreenWidth		();
-		int ScreenHeight	();
+        int ScreenWidth();
+        int ScreenHeight();
 
-		void setVSync		(bool VSync);
-		void setClearColour	(sf::Color c);
+        sf::RenderWindow    &getWindow();
+        StateMachine        &getStateMachine();
 
-	private:
-		bool m_isRunning;
-		bool m_VSync;
+        void setVSync(bool VSync);
+        void setClearColour(sf::Color c);
 
-		sf::RenderWindow    m_window;
-		sf::Vector2i        m_screenSize;
-		sf::Color           m_clearColour;
+    private:
+        bool m_isRunning;
+        bool m_VSync;
 
-		sf::Clock	m_clock;
-		sf::Time	m_elapsed;
+        sf::RenderWindow    m_window;
+        sf::Vector2i        m_screenSize;
+        sf::Color           m_clearColour;
 
-		StateMachine m_stateMachine;
+        sf::Clock	m_clock;
+        sf::Time	m_elapsed;
 
-		void CheckEvents	();
-		void ClearWindow	();
-		void DisplayWindow	();
-	};
+        StateMachine m_stateMachine;
+
+        void CheckEvents();
+        void ClearWindow();
+        void DisplayWindow();
+    };
 }

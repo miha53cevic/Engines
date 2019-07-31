@@ -1,5 +1,5 @@
 #pragma once
-#include <stack>
+#include <deque>
 
 #include "../States/State.h"
 
@@ -23,7 +23,7 @@ namespace we
 		StateRef &GetActiveState();
 
 	private:
-		std::stack<StateRef> m_states;
+		std::deque<StateRef> m_states;
 		StateRef m_newState;
 
 		bool m_isAdding;

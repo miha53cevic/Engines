@@ -23,16 +23,16 @@ void we::StateMachine::ProcessStateChanges()
 		{
 			if (m_isReplacing)
 			{
-				m_states.pop();
+				m_states.pop_front();
 			}
 			else
 			{
-				m_states.top()->Pause();
+				m_states.front()->Pause();
 			}
 		}
 
-		m_states.push(std::move(m_newState));
-		m_states.top()->Init();
+		m_states.push_front(std::move(m_newState));
+		m_states.front()->Init();
 		
 		m_isAdding = false;
 	}
@@ -40,11 +40,11 @@ void we::StateMachine::ProcessStateChanges()
 	// Remove state
 	if (m_isRemoving && !m_states.empty())
 	{
-		m_states.pop();
+		m_states.pop_front();
 
 		if (!m_states.empty())
 		{
-			m_states.top()->Resume();
+			m_states.front()->Resume();
 		}
 
 		m_isRemoving = false;
@@ -58,7 +58,7 @@ bool we::StateMachine::isEmpty()
 
 we::StateRef& we::StateMachine::GetActiveState()
 {
-	return m_states.top();
+	return m_states.front();
 }
 
 
