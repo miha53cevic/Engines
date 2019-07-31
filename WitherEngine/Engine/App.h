@@ -25,9 +25,9 @@ namespace we
 		bool m_isRunning;
 		bool m_VSync;
 
-		sf::RenderWindow	m_window;
-		sf::Vector2i		m_screenSize;
-		sf::Color			m_clearColour;
+		sf::RenderWindow    m_window;
+		sf::Vector2i        m_screenSize;
+		sf::Color           m_clearColour;
 
 		sf::Clock	m_clock;
 		sf::Time	m_elapsed;
