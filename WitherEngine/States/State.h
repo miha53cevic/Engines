@@ -12,11 +12,11 @@ namespace we
 			: m_app(app)
 		{}
 
-		virtual void Init()							= 0;
+		virtual void Init()								= 0;
 
-		virtual void HandleInput(sf::Event& e)		= 0;
-		virtual void Update(float deltaTime)		= 0;
-		virtual void Draw(sf::RenderWindow& window) = 0;
+		virtual void HandleInput(sf::Event& e)			= 0;
+		virtual void Update(float deltaTime)			= 0;
+		virtual void Draw(sf::RenderWindow& window)		= 0;
 
 		virtual void Pause()	{}
 		virtual void Resume()	{}
