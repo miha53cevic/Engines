@@ -21,11 +21,11 @@ namespace we
         sf::RenderWindow    &getWindow();
         StateMachine        &getStateMachine();
 
-        void setVSync(bool VSync);
-        void setClearColour(sf::Color c);
+        void setVSync           (bool VSync);
+        void setClearColour     (sf::Color c);
 
     private:
-        bool m_isRunning;
+        bool m_isRunning;   
         bool m_VSync;
 
         sf::RenderWindow    m_window;
