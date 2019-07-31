@@ -1,1 +1,0 @@
-Mora imati font consolas sa fps counter inace ne radi!
