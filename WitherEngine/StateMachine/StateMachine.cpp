@@ -5,8 +5,8 @@ void we::StateMachine::AddState(StateRef newState, bool isReplacing)
 	// copy the state over
 	m_newState = std::move(newState);
 
-	m_isAdding	= true;
-	m_isReplacing = isReplacing;
+	m_isAdding      = true;
+	m_isReplacing   = isReplacing;
 }
 
 void we::StateMachine::RemoveState()
