@@ -22,6 +22,8 @@ namespace we
 
 		StateRef &GetActiveState();
 
+        std::deque<StateRef> &GetStates();
+
 	private:
 		std::deque<StateRef> m_states;
 		StateRef m_newState;

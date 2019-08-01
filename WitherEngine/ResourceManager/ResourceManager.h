@@ -40,11 +40,11 @@ public:
 		std::cout << "Loaded " << m_textures.size() << " texture(s)\n";
 
 		// Load font
-		if (!m_font.loadFromFile("fonts/consola.ttf"))
+		if (!m_font.loadFromFile("fonts/arial.ttf"))
 		{
 			// Error
 		}
-		else std::cout << "Loaded font consola.ttf\n";
+		else std::cout << "Loaded font arial.ttf\n";
 
 		// Close file
 		config.close();

@@ -42,13 +42,14 @@ void we::StateMachine::ProcessStateChanges()
 	{
 		m_states.pop_front();
 
+        m_isRemoving = false;
+
 		if (!m_states.empty())
 		{
 			m_states.front()->Resume();
 		}
-
-		m_isRemoving = false;
 	}
+    else if (m_isRemoving) m_isRemoving = false;
 }
 
 bool we::StateMachine::isEmpty()
@@ -59,6 +60,11 @@ bool we::StateMachine::isEmpty()
 we::StateRef& we::StateMachine::GetActiveState()
 {
 	return m_states.front();
+}
+
+std::deque<we::StateRef>& we::StateMachine::GetStates()
+{
+    return m_states;
 }
 
 
