@@ -10,7 +10,7 @@ namespace we
 	class StateMachine
 	{
 	public:
-		StateMachine()  = default;
+		StateMachine();
 		~StateMachine() = default;
 
 		void AddState(StateRef newState, bool isReplacing = true);

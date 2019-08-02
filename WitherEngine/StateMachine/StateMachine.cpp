@@ -1,5 +1,12 @@
 #include "StateMachine.h"
 
+we::StateMachine::StateMachine()
+{
+    m_isAdding      = false;
+    m_isRemoving    = false;
+    m_isReplacing   = false;
+}
+
 void we::StateMachine::AddState(StateRef newState, bool isReplacing)
 {
 	// copy the state over
