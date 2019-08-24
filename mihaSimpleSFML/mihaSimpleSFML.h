@@ -18,7 +18,7 @@ public:
 private:
 
 protected:
-    void Event(sf::Event& e)
+    void Event(sf::Event e) override
     {
     }
 
