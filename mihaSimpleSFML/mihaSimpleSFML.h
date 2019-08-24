@@ -28,7 +28,7 @@ protected:
 		return true;
 	}
 
-	OnUserUpdate(sf::Time elapsed) override
+	bool OnUserUpdate(sf::Time elapsed) override
 	{
 		return true;
 	}
