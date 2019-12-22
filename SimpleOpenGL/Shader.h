@@ -1,14 +1,31 @@
 #pragma once
 #include <string>
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 class Shader
 {
 public:
-    Shader(const std::string& fileName);
+    Shader();
     ~Shader();
 
+    void createProgram(const std::string& fileName);
+
     void Bind();
+    void Unbind();
+
+
+protected:
+    virtual void bindAttributes() = 0;
+    void bindAttribute(int attribute, std::string variableName);
+
+    virtual void getAllUniformLocations() = 0;
+    int getUniformLocation(std::string uniformName);
+
+    void loadFloat(int location, float value);
+    void loadVector(int location, glm::vec3 vector);
+    void loadBool(int location, bool value);
+    void loadMatrix(int location, const glm::mat4x4& matrix);
 
 private:
     static const unsigned int NUM_SHADERS = 2;

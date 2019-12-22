@@ -1,7 +1,6 @@
 #include "SimpleOpenGL.h"
-#include <gl/glew.h>
 
-#include "Shader.h"
+#include "Static_Shader.h"
 #include "Mesh.h"
 
 class OpenGL : public SimpleOpenGL
@@ -13,7 +12,7 @@ public:
 
 private:
     std::unique_ptr<Mesh> mesh;
-    std::unique_ptr<Shader> shaderProgram;
+    std::unique_ptr<Static_Shader> shaderProgram;
 
 protected:
     void Event(sf::Event& e) override
@@ -38,8 +37,17 @@ protected:
             3,1,2
         };
 
+        std::vector<GLfloat> textureCoords = {
+            0, 0,
+            0, 1,
+            1, 1,
+            1, 0
+        };
+
         mesh = std::make_unique<Mesh>(data, indicies);
-        shaderProgram = std::make_unique<Shader>("shaders/simple_shader");
+        mesh->addTexture("tex/sample.png", textureCoords);
+        shaderProgram = std::make_unique<Static_Shader>();
+        shaderProgram->createProgram("shaders/texture_shader");
 
         return true;
     }
@@ -48,6 +56,7 @@ protected:
     {
         shaderProgram->Bind();
         mesh->Draw();
+        shaderProgram->Unbind();
 
         return true;
     }
