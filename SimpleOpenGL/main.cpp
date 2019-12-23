@@ -1,7 +1,8 @@
 #include "SimpleOpenGL.h"
 
 #include "Static_Shader.h"
-#include "Mesh.h"
+#include "Entity.h"
+#include "Renderer.h"
 
 class OpenGL : public SimpleOpenGL
 {
@@ -11,8 +12,13 @@ public:
     }
 
 private:
-    std::unique_ptr<Mesh> mesh;
-    std::unique_ptr<Static_Shader> shaderProgram;
+    // Napomena: Nemoj koristiti prazne Constructore jer se onda zove deconstructor nakon kaj se doda
+    // Zato su bolji std::unique_ptr<>() jer se oni brisu samo kada se glavni objekt brise
+    // Ali se zato moraju podaci prebaciti preko std::move()
+    EntityRef entity;
+    Static_ShaderRef shaderProgram;
+    RendererRef renderer;
+    MeshRef mesh;
 
 protected:
     void Event(sf::Event& e) override
@@ -44,18 +50,102 @@ protected:
             1, 0
         };
 
-        mesh = std::make_unique<Mesh>(data, indicies);
-        mesh->addTexture("tex/sample.png", textureCoords);
+        std::vector<GLfloat> cubeData = {
+            -0.5f,0.5f,-0.5f,
+                -0.5f,-0.5f,-0.5f,
+                0.5f,-0.5f,-0.5f,
+                0.5f,0.5f,-0.5f,
+
+                -0.5f,0.5f,0.5f,
+                -0.5f,-0.5f,0.5f,
+                0.5f,-0.5f,0.5f,
+                0.5f,0.5f,0.5f,
+
+                0.5f,0.5f,-0.5f,
+                0.5f,-0.5f,-0.5f,
+                0.5f,-0.5f,0.5f,
+                0.5f,0.5f,0.5f,
+
+                -0.5f,0.5f,-0.5f,
+                -0.5f,-0.5f,-0.5f,
+                -0.5f,-0.5f,0.5f,
+                -0.5f,0.5f,0.5f,
+
+                -0.5f,0.5f,0.5f,
+                -0.5f,0.5f,-0.5f,
+                0.5f,0.5f,-0.5f,
+                0.5f,0.5f,0.5f,
+
+                -0.5f,-0.5f,0.5f,
+                -0.5f,-0.5f,-0.5f,
+                0.5f,-0.5f,-0.5f,
+                0.5f,-0.5f,0.5f
+        };
+
+        std::vector<GLuint> Cubeindicies = {
+            0,1,3,
+                3,1,2,
+                4,5,7,
+                7,5,6,
+                8,9,11,
+                11,9,10,
+                12,13,15,
+                15,13,14,
+                16,17,19,
+                19,17,18,
+                20,21,23,
+                23,21,22
+        };
+
+        std::vector<GLfloat> CubetextureCoords = {
+            0,0,
+                0,1,
+                1,1,
+                1,0,
+                0,0,
+                0,1,
+                1,1,
+                1,0,
+                0,0,
+                0,1,
+                1,1,
+                1,0,
+                0,0,
+                0,1,
+                1,1,
+                1,0,
+                0,0,
+                0,1,
+                1,1,
+                1,0,
+                0,0,
+                0,1,
+                1,1,
+                1,0
+        };
+
+        // Primjena napomene gore navedene
+        entity = std::make_unique<Entity>(std::make_unique<Mesh>(cubeData, Cubeindicies), glm::vec3(0,0,-1.5f), glm::vec3(0,0,0), 1);
+
+        // Add texture to the mesh
+        entity->getMesh()->addTexture("tex/sample.png", CubetextureCoords);
+
         shaderProgram = std::make_unique<Static_Shader>();
         shaderProgram->createProgram("shaders/texture_shader");
+
+        renderer = std::make_unique<Renderer>(glm::vec2(ScreenWidth(), ScreenHeight()), shaderProgram);
 
         return true;
     }
 
     bool OnUserUpdate(sf::Time elapsed) override
     {
+        entity->Rotate(-1, -1, 0);
+
         shaderProgram->Bind();
-        mesh->Draw();
+       
+        renderer->Render(entity, shaderProgram.get());
+
         shaderProgram->Unbind();
 
         return true;

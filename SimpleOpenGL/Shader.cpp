@@ -148,3 +148,13 @@ void Shader::loadMatrix(int location, const glm::mat4x4 & matrix)
 {
     glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
+
+void Shader::loadTransformationMatrix(glm::mat4x4 matrix)
+{
+    loadMatrix(m_location_transMatrix, matrix);
+}
+
+void Shader::loadProjectionMatrix(glm::mat4x4 matrix)
+{
+    loadMatrix(m_location_projectMatrix, matrix);
+}

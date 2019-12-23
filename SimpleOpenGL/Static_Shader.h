@@ -10,5 +10,9 @@ public:
 private:
     void bindAttributes() override;
     void getAllUniformLocations() override;
+
+private:
 };
+
+typedef std::unique_ptr<Static_Shader> Static_ShaderRef;
 

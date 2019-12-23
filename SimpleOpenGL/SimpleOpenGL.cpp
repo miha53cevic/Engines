@@ -70,6 +70,7 @@ void SimpleOpenGL::start()
         if (m_bDrawFPS)
             m_window.setTitle(m_title + " - FPS: " + std::to_string(1.0f / m_elapsed.asSeconds()));
     }
+
 }
 
 int SimpleOpenGL::ScreenWidth()
@@ -109,6 +110,11 @@ void SimpleOpenGL::Event(sf::Event & e)
 
 void SimpleOpenGL::BeginDraw(float r, float g, float b, float a)
 {
+    // Enable the depth buffer
+    glEnable(GL_DEPTH_TEST);
+
+    // CLEAR DEPTH BUFFER BIT so triangles don't overlap
+    // CLEAR COLOR BUFFER for background screen
     glClearColor(r, g, b, a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

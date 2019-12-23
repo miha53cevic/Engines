@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <gl/glew.h>
+#include <memory>
 
 class Mesh
 {
@@ -10,6 +11,10 @@ public:
 
     void Draw();
     void addTexture(const std::string path, const std::vector<GLfloat>& textureCoords);
+
+    GLuint getVAO();
+    GLuint getTexture();
+    int    getVertexCount();
 
 private:
     void createVAO();
@@ -27,4 +32,8 @@ private:
     std::vector<GLuint> m_textures;
     void loadTexture(std::string fileName);
 };
+
+typedef std::unique_ptr<Mesh> MeshRef;
+
+
 

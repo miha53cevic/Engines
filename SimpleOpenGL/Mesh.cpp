@@ -25,6 +25,8 @@ Mesh::~Mesh()
     {
         glDeleteBuffers(1, &i);
     }
+
+    printf("Mesh: Destructor Called!\n");
 }
 
 void Mesh::Draw()
@@ -51,6 +53,21 @@ void Mesh::addTexture(const std::string path, const std::vector<GLfloat>& textur
     unbindVAO();
 
     loadTexture(path);
+}
+
+GLuint Mesh::getVAO()
+{
+    return m_VAO;
+}
+
+GLuint Mesh::getTexture()
+{
+    return m_TextureID;
+}
+
+int Mesh::getVertexCount()
+{
+    return m_vertexCount;
 }
 
 void Mesh::createVAO()  

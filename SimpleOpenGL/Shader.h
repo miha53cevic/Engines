@@ -36,4 +36,15 @@ private:
 
     GLuint m_program;
     GLuint m_shaders[NUM_SHADERS];
+
+public:
+    void loadTransformationMatrix(glm::mat4x4 matrix);
+    void loadProjectionMatrix(glm::mat4x4 matrix);
+
+protected:
+    int m_location_transMatrix;
+    int m_location_projectMatrix;
+    int m_location_viewMatrix;
 };
+
+typedef std::unique_ptr<Shader> ShaderRef;
