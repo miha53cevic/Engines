@@ -158,3 +158,10 @@ void Shader::loadProjectionMatrix(glm::mat4x4 matrix)
 {
     loadMatrix(m_location_projectMatrix, matrix);
 }
+
+void Shader::loadViewMatrix(Camera* camera)
+{
+    glm::mat4x4 viewMatrix = Math::createViewMatrix(camera);
+
+    loadMatrix(m_location_viewMatrix, viewMatrix);
+}

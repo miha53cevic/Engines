@@ -3,6 +3,8 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Camera.h"
+
 class Math
 {
 public:
@@ -24,6 +26,19 @@ public:
     glm::mat4x4 static createProjectionMatrix(glm::vec2 screenSize, float FOV, float NEAR_PLANE, float FAR_PLANE)
     {
         return glm::perspective(FOV, (screenSize.x / screenSize.y), NEAR_PLANE, FAR_PLANE);
+    }
+
+    glm::mat4x4 static createViewMatrix(Camera* camera)
+    {
+        // The camera never moves the world moves opposite of the camera
+        glm::mat4x4 view = glm::mat4x4(1.0f);
+
+        view = glm::rotate(view, glm::radians(camera->getRotation().x), glm::vec3(1, 0, 0));
+        view = glm::rotate(view, glm::radians(camera->getRotation().y), glm::vec3(0, 1, 0));
+        view = glm::rotate(view, glm::radians(camera->getRotation().z), glm::vec3(0, 0, 1));
+        view = glm::translate(view, -camera->getPosition());
+
+        return view;
     }
 
 private:

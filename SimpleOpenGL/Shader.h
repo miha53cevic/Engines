@@ -3,6 +3,8 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
+#include "Math.h"
+
 class Shader
 {
 public:
@@ -40,6 +42,7 @@ private:
 public:
     void loadTransformationMatrix(glm::mat4x4 matrix);
     void loadProjectionMatrix(glm::mat4x4 matrix);
+    void loadViewMatrix(Camera* camera);
 
 protected:
     int m_location_transMatrix;

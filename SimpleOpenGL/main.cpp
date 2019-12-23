@@ -18,7 +18,7 @@ private:
     EntityRef entity;
     Static_ShaderRef shaderProgram;
     RendererRef renderer;
-    MeshRef mesh;
+    CameraRef camera;
 
 protected:
     void Event(sf::Event& e) override
@@ -51,77 +51,77 @@ protected:
         };
 
         std::vector<GLfloat> cubeData = {
-            -0.5f,0.5f,-0.5f,
-                -0.5f,-0.5f,-0.5f,
-                0.5f,-0.5f,-0.5f,
-                0.5f,0.5f,-0.5f,
+            -0.5f,  0.5f, -0.5f,
+            -0.5f, -0.5f, -0.5f,
+             0.5f, -0.5f, -0.5f,
+             0.5f,  0.5f, -0.5f,
 
-                -0.5f,0.5f,0.5f,
-                -0.5f,-0.5f,0.5f,
-                0.5f,-0.5f,0.5f,
-                0.5f,0.5f,0.5f,
+            -0.5f,  0.5f, 0.5f,
+            -0.5f, -0.5f, 0.5f,
+             0.5f, -0.5f, 0.5f,
+             0.5f,  0.5f, 0.5f,
 
-                0.5f,0.5f,-0.5f,
-                0.5f,-0.5f,-0.5f,
-                0.5f,-0.5f,0.5f,
-                0.5f,0.5f,0.5f,
+             0.5f,  0.5f, -0.5f,
+             0.5f, -0.5f, -0.5f,
+             0.5f, -0.5f,  0.5f,
+             0.5f,  0.5f,  0.5f,
 
-                -0.5f,0.5f,-0.5f,
-                -0.5f,-0.5f,-0.5f,
-                -0.5f,-0.5f,0.5f,
-                -0.5f,0.5f,0.5f,
+            -0.5f,  0.5f, -0.5f,
+            -0.5f, -0.5f, -0.5f,
+            -0.5f, -0.5f,  0.5f,
+            -0.5f,  0.5f,  0.5f,
 
-                -0.5f,0.5f,0.5f,
-                -0.5f,0.5f,-0.5f,
-                0.5f,0.5f,-0.5f,
-                0.5f,0.5f,0.5f,
+            -0.5f, 0.5f,  0.5f,
+            -0.5f, 0.5f, -0.5f,
+             0.5f, 0.5f, -0.5f,
+             0.5f, 0.5f,  0.5f,
 
-                -0.5f,-0.5f,0.5f,
-                -0.5f,-0.5f,-0.5f,
-                0.5f,-0.5f,-0.5f,
-                0.5f,-0.5f,0.5f
+            -0.5f, -0.5f,  0.5f,
+            -0.5f, -0.5f, -0.5f,
+             0.5f, -0.5f, -0.5f,
+             0.5f, -0.5f,  0.5f
         };
 
         std::vector<GLuint> Cubeindicies = {
             0,1,3,
-                3,1,2,
-                4,5,7,
-                7,5,6,
-                8,9,11,
-                11,9,10,
-                12,13,15,
-                15,13,14,
-                16,17,19,
-                19,17,18,
-                20,21,23,
-                23,21,22
+            3,1,2,
+            4,5,7,
+            7,5,6,
+            8,9,11,
+            11,9,10,
+            12,13,15,
+            15,13,14,
+            16,17,19,
+            19,17,18,
+            20,21,23,
+            23,21,22
         };
 
         std::vector<GLfloat> CubetextureCoords = {
             0,0,
-                0,1,
-                1,1,
-                1,0,
-                0,0,
-                0,1,
-                1,1,
-                1,0,
-                0,0,
-                0,1,
-                1,1,
-                1,0,
-                0,0,
-                0,1,
-                1,1,
-                1,0,
-                0,0,
-                0,1,
-                1,1,
-                1,0,
-                0,0,
-                0,1,
-                1,1,
-                1,0
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0,
+            0,0,
+            0,1,
+            1,1,
+            1,0
         };
 
         // Primjena napomene gore navedene
@@ -135,15 +135,20 @@ protected:
 
         renderer = std::make_unique<Renderer>(glm::vec2(ScreenWidth(), ScreenHeight()), shaderProgram);
 
+        camera = std::make_unique<Camera>();
+
         return true;
     }
 
     bool OnUserUpdate(sf::Time elapsed) override
     {
-        entity->Rotate(-1, -1, 0);
+        entity->Rotate(-100 * elapsed.asSeconds(), -100 * elapsed.asSeconds(), 0);
+
+        camera->Update(elapsed, 10.0f);
 
         shaderProgram->Bind();
        
+        shaderProgram->loadViewMatrix(camera.get());
         renderer->Render(entity, shaderProgram.get());
 
         shaderProgram->Unbind();
