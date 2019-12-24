@@ -26,6 +26,7 @@ public:
         {
             m_position.x += Speed * elapsed.asSeconds();
         }
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
             m_position.x -= Speed * elapsed.asSeconds();

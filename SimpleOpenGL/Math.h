@@ -5,6 +5,8 @@
 
 #include "Camera.h"
 
+#include <random>
+
 class Math
 {
 public:
@@ -39,6 +41,25 @@ public:
         view = glm::translate(view, -camera->getPosition());
 
         return view;
+    }
+
+    // Random number generator in given range
+    float static fRandom(float first, float second)
+    {
+        std::random_device rd;
+        std::default_random_engine generator(rd()); // rd() provides a random seed
+        std::uniform_real_distribution<float> distribution(first, second);
+
+        return distribution(generator);
+    }
+
+    int static iRandom(int first, int second)
+    {
+        std::random_device rd;
+        std::default_random_engine generator(rd()); // rd() provides a random seed
+        std::uniform_int_distribution<int> distribution(first, second);
+
+        return distribution(generator);
     }
 
 private:

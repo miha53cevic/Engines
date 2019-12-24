@@ -31,7 +31,7 @@ protected:
         EnableVSync(true);
 
         // Go counter-clockwise in OpenGL
-        std::vector<GLfloat> data = {
+        /*std::vector<GLfloat> data = {
             -0.5f,  0.5f, 0.0f, //v0
             -0.5f, -0.5f, 0.0f, //v1
              0.5f, -0.5f, 0.0f, //v2
@@ -48,7 +48,7 @@ protected:
             0, 1,
             1, 1,
             1, 0
-        };
+        };*/
 
         std::vector<GLfloat> cubeData = {
             -0.5f,  0.5f, -0.5f,
@@ -125,10 +125,12 @@ protected:
         };
 
         // Primjena napomene gore navedene
-        entity = std::make_unique<Entity>(std::make_unique<Mesh>(cubeData, Cubeindicies), glm::vec3(0,0,-1.5f), glm::vec3(0,0,0), 1);
+        //entity = std::make_unique<Entity>(std::make_unique<Mesh>(cubeData, Cubeindicies), glm::vec3(0,0,-1.5f), glm::vec3(0,0,0), 1);
 
         // Add texture to the mesh
-        entity->getMesh()->addTexture("tex/sample.png", CubetextureCoords);
+        //entity->getMesh()->addTexture("tex/sample.png", CubetextureCoords);
+
+        entity = std::make_unique<Entity>("obj/stall", "tex/stallTexture.png", glm::vec3(0, 0, -5.0f), glm::vec3(0, 0, 0), 1);
 
         shaderProgram = std::make_unique<Static_Shader>();
         shaderProgram->createProgram("shaders/texture_shader");
@@ -142,7 +144,8 @@ protected:
 
     bool OnUserUpdate(sf::Time elapsed) override
     {
-        entity->Rotate(-100 * elapsed.asSeconds(), -100 * elapsed.asSeconds(), 0);
+        //entity->Rotate(-100 * elapsed.asSeconds(), -100 * elapsed.asSeconds(), 0);
+        entity->Rotate(0, -100 * elapsed.asSeconds(), 0);
 
         camera->Update(elapsed, 10.0f);
 

@@ -3,6 +3,8 @@
 #include "Static_Shader.h"
 #include "Entity.h"
 
+#include <list>
+
 class Renderer
 {
 public:

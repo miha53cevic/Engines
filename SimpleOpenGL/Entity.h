@@ -6,6 +6,7 @@ class Entity
 {
 public:
     Entity(MeshRef mesh, glm::vec3 position, glm::vec3 rotation, float scale);
+    Entity(std::string obj_path, std::string texture_path, glm::vec3 position, glm::vec3 rotation, float scale);
 
     void Move(float dx, float dy, float dz);
     void Rotate(float dx, float dy, float dz);
@@ -25,6 +26,8 @@ private:
     glm::vec3 m_position;
     glm::vec3 m_rotation;
     float m_scale;
+
+    void loadOBJ(std::string obj_path, std::string texture_path);
 };
 
 typedef std::unique_ptr<Entity> EntityRef;
