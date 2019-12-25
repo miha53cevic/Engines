@@ -55,17 +55,24 @@ void Mesh::addTexture(const std::string path, const std::vector<GLfloat>& textur
     loadTexture(path);
 }
 
-GLuint Mesh::getVAO()
+void Mesh::addNormals(const std::vector<GLfloat>& normals)
+{
+    glBindVertexArray(m_VAO);
+    storeDataInAttributeList(2, 3, normals);
+    unbindVAO();
+}
+
+GLuint Mesh::getVAO() const
 {
     return m_VAO;
 }
 
-GLuint Mesh::getTexture()
+GLuint Mesh::getTexture() const
 {
     return m_TextureID;
 }
 
-int Mesh::getVertexCount()
+int Mesh::getVertexCount() const
 {
     return m_vertexCount;
 }

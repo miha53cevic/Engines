@@ -27,7 +27,7 @@ public:
 
     glm::mat4x4 static createProjectionMatrix(glm::vec2 screenSize, float FOV, float NEAR_PLANE, float FAR_PLANE)
     {
-        return glm::perspective(FOV, (screenSize.x / screenSize.y), NEAR_PLANE, FAR_PLANE);
+        return glm::perspective(glm::radians(FOV), (screenSize.x / screenSize.y), NEAR_PLANE, FAR_PLANE);
     }
 
     glm::mat4x4 static createViewMatrix(Camera* camera)

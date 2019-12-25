@@ -11,10 +11,11 @@ public:
 
     void Draw();
     void addTexture(const std::string path, const std::vector<GLfloat>& textureCoords);
+    void addNormals(const std::vector<GLfloat>& normals);
 
-    GLuint getVAO();
-    GLuint getTexture();
-    int    getVertexCount();
+    GLuint getVAO() const;
+    GLuint getTexture() const;
+    int    getVertexCount() const;
 
 private:
     void createVAO();

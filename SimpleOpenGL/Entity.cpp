@@ -87,6 +87,7 @@ void Entity::loadOBJ(std::string obj_path, std::string texture_path)
     std::vector<GLfloat> vertices;
     std::vector<GLuint> indicies;
     std::vector<GLfloat> textureCoords;
+    std::vector<GLfloat> normals;
 
     for (auto& vertex : loader.LoadedMeshes[0].Vertices)
     {
@@ -97,6 +98,10 @@ void Entity::loadOBJ(std::string obj_path, std::string texture_path)
         // Napomena mora biti 1.0f - texY inace ne radi
         textureCoords.push_back(vertex.TextureCoordinate.X);
         textureCoords.push_back(1.0f - vertex.TextureCoordinate.Y);
+
+        normals.push_back(vertex.Normal.X);
+        normals.push_back(vertex.Normal.Y);
+        normals.push_back(vertex.Normal.Z);
     }
 
     for (auto& indicie : loader.LoadedMeshes[0].Indices)
@@ -106,4 +111,5 @@ void Entity::loadOBJ(std::string obj_path, std::string texture_path)
 
     m_mesh = std::make_unique<Mesh>(vertices, indicies);
     m_mesh->addTexture(texture_path, textureCoords);
+    m_mesh->addNormals(normals);
 }
