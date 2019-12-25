@@ -94,8 +94,9 @@ void Entity::loadOBJ(std::string obj_path, std::string texture_path)
         vertices.push_back(vertex.Position.Y);
         vertices.push_back(vertex.Position.Z);
 
+        // Napomena mora biti 1.0f - texY inace ne radi
         textureCoords.push_back(vertex.TextureCoordinate.X);
-        textureCoords.push_back(vertex.TextureCoordinate.Y);
+        textureCoords.push_back(1.0f - vertex.TextureCoordinate.Y);
     }
 
     for (auto& indicie : loader.LoadedMeshes[0].Indices)
