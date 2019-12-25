@@ -130,7 +130,7 @@ protected:
         // Add texture to the mesh
         //entity->getMesh()->addTexture("tex/sample.png", CubetextureCoords);
 
-        entity = std::make_unique<Entity>("obj/stall", "tex/stallTexture.png", glm::vec3(0, 0, -5.0f), glm::vec3(0, 0, 0), 1);
+        entity = std::make_unique<Entity>("obj/Cube", "tex/Cube.png", glm::vec3(0, 0, -5.0f), glm::vec3(0, 0, 0), 1);
 
         shaderProgram = std::make_unique<Static_Shader>();
         shaderProgram->createProgram("shaders/texture_shader");
@@ -144,8 +144,8 @@ protected:
 
     bool OnUserUpdate(sf::Time elapsed) override
     {
-        //entity->Rotate(-100 * elapsed.asSeconds(), -100 * elapsed.asSeconds(), 0);
-        entity->Rotate(0, -100 * elapsed.asSeconds(), 0);
+        entity->Rotate(-100 * elapsed.asSeconds(), -100 * elapsed.asSeconds(), 0);
+        //entity->Rotate(0, -100 * elapsed.asSeconds(), 0);
 
         camera->Update(elapsed, 10.0f);
 
