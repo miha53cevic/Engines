@@ -37,7 +37,7 @@ protected:
         light.setPosition(glm::vec3(0, 0, -20));
         light.setColour(glm::vec3(1, 1, 1));
 
-        entity = std::make_unique<Entity>("obj/dragon", "tex/blank.png", glm::vec3(0, 0, -25.0f), glm::vec3(0, 0, 0), 1);
+        entity = std::make_unique<Entity>("obj/Cube", "tex/Cube.png", glm::vec3(0, 0, -25.0f), glm::vec3(0, 0, 0), 1);
 
         shaderProgram = std::make_unique<Static_Shader>();
         shaderProgram->createProgram("shaders/texture_shader");

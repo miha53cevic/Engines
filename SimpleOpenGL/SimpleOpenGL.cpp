@@ -54,6 +54,8 @@ void SimpleOpenGL::start()
                 m_bRunning = false;
             if (event.type == sf::Event::Resized)
                 glViewport(0, 0, event.size.width, event.size.height);
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Q)
+                m_bRunning = false;
 
             Event(event);
         }
