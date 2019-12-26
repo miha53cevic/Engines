@@ -5,6 +5,8 @@
 #include "Renderer.h"
 #include "Light.h"
 
+#include "Terrain.h"
+
 class OpenGL : public SimpleOpenGL
 {
 public:
@@ -21,7 +23,7 @@ private:
     RendererRef renderer;
     CameraRef camera;
     Light light;
-    std::map<Mesh, std::vector<Entity>> entities;
+    Terrain* terrain;
 
 protected:
     void Event(sf::Event& e) override
@@ -34,10 +36,10 @@ protected:
         EnableVSync(true);
 
         // Create light source
-        light.setPosition(glm::vec3(0, 0, -20));
+        light.setPosition(glm::vec3(0, 100, 0));
         light.setColour(glm::vec3(1, 1, 1));
 
-        entity = std::make_unique<Entity>("obj/Cube", "tex/Cube.png", glm::vec3(0, 0, -25.0f), glm::vec3(0, 0, 0), 1);
+        entity = std::make_unique<Entity>("obj/Cube", "tex/blank.png", glm::vec3(0, 0, -25.0f), glm::vec3(0, 0, 0), 1);
 
         shaderProgram = std::make_unique<Static_Shader>();
         shaderProgram->createProgram("shaders/texture_shader");
@@ -46,20 +48,22 @@ protected:
 
         camera = std::make_unique<Camera>();
 
+        terrain = new Terrain();
+
         return true;
     }
 
     bool OnUserUpdate(sf::Time elapsed) override
     {
-        entity->Rotate(0, -100 * elapsed.asSeconds(), 0);
+        //entity->Rotate(0, -100 * elapsed.asSeconds(), 0);
 
         camera->Update(elapsed, 10.0f);
 
         shaderProgram->Bind();
         shaderProgram->loadLight(light);
-       
         shaderProgram->loadViewMatrix(camera.get());
         renderer->Render(entity, shaderProgram.get());
+        terrain->Draw(shaderProgram.get());
 
         shaderProgram->Unbind();
 

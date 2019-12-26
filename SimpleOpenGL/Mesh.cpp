@@ -62,6 +62,13 @@ void Mesh::addNormals(const std::vector<GLfloat>& normals)
     unbindVAO();
 }
 
+void Mesh::addData(std::vector<GLfloat>& data, GLuint attributeID, GLuint size)
+{
+    glBindVertexArray(m_VAO);
+    storeDataInAttributeList(attributeID, size, data);
+    unbindVAO();
+}
+
 GLuint Mesh::getVAO() const
 {
     return m_VAO;

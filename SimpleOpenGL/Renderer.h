@@ -3,8 +3,6 @@
 #include "Static_Shader.h"
 #include "Entity.h"
 
-#include <map>
-
 class Renderer
 {
 public:
@@ -29,8 +27,8 @@ public:
     void Render(EntityRef& entity, Shader* shader)
     {
         // Don't draw faces that the camera can not see
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
+        //glEnable(GL_CULL_FACE);
+        //glCullFace(GL_BACK);
 
         glBindVertexArray(entity->getMesh()->getVAO());
 
@@ -43,33 +41,6 @@ public:
         glDrawElements(GL_TRIANGLES, entity->getMesh()->getVertexCount(), GL_UNSIGNED_INT, 0);
         
         glBindVertexArray(0);
-    }
-
-    void Render(std::map<Mesh, std::vector<EntityRef>> entities, Shader* shader)
-    {
-        // Don't draw faces that the camera can not see
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
-
-        for (auto& key : entities)
-        {
-            // Prepeare Model
-            glBindVertexArray(key.first.getVAO());
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, key.first.getTexture());
-
-            // Prepeare and draw all the entities
-            for (auto& entity : key.second)
-            {
-                glm::mat4x4 transformationMatrix = Math::createTransformationMatrix(entity->getPosition(), entity->getRotation(), entity->getScale());
-                shader->loadTransformationMatrix(transformationMatrix);
-
-                glDrawElements(GL_TRIANGLES, entity->getMesh()->getVertexCount(), GL_UNSIGNED_INT, 0);
-            }
-
-            // Unbind model
-            glBindVertexArray(0);
-        }
     }
 
 private:

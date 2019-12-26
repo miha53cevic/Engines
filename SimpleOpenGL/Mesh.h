@@ -13,6 +13,8 @@ public:
     void addTexture(const std::string path, const std::vector<GLfloat>& textureCoords);
     void addNormals(const std::vector<GLfloat>& normals);
 
+    void addData(std::vector<GLfloat>& data, GLuint attributeID, GLuint size);
+
     GLuint getVAO() const;
     GLuint getTexture() const;
     int    getVertexCount() const;

@@ -16,7 +16,7 @@ uniform vec3 lightPosition;
 
 void main(void)
 {
-	// Multiply order matters: Projection * View * Trans
+	// Multiply order matters: Projection * View * Trans - MVP
 	gl_Position =  projectionMatrix * viewMatrix * transformationMatrix * vec4(position, 1.0);
 	pass_textureCoords = textureCoords;
 
