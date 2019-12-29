@@ -1,5 +1,5 @@
 #include "SimpleOpenGL.h"
-#include <gl/glew.h>
+#include <glad/glad.h>
 #include <stdio.h>
 
 SimpleOpenGL::SimpleOpenGL()
@@ -33,13 +33,12 @@ void SimpleOpenGL::start()
     m_bRunning = true;
 
     // Load after window
-    GLenum err = glewInit();
-    if (GLEW_OK != err)
+    if (!gladLoadGL())
     {
-        // Error
-        printf("Error: %s\n", glewGetErrorString);
+        printf("Failed to gladLoadGL!");
+        exit(-1);
     }
-    else printf("Using GLEW %s\n", glewGetString(GLEW_VERSION));
+    else printf("OpenGL %d.%d\n", GLVersion.major, GLVersion.minor);
 
     // Main Event Loop 
     if (!OnUserCreate())
@@ -99,6 +98,12 @@ bool SimpleOpenGL::IsVSyncOn()
 void SimpleOpenGL::EnableFPSCounter(bool fps)
 {
     m_bDrawFPS = fps;
+}
+
+void SimpleOpenGL::EnableWireframe(bool wireframe)
+{
+    if (wireframe) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    else           glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 sf::Window * SimpleOpenGL::getWindow()

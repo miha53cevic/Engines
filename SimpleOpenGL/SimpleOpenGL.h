@@ -19,6 +19,8 @@ public:
 
     void EnableFPSCounter(bool fps);
 
+    void EnableWireframe(bool wireframe);
+
     sf::Window* getWindow();
 
 protected:

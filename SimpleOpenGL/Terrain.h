@@ -49,31 +49,38 @@ public:
             }
         }
 
-        entity = std::make_unique<Entity>(std::make_unique<Mesh>(vertices, indices), pos, rot, scale);
-        entity->getMesh()->addTexture("tex/grass.png", textureCoords);
+        mesh = new Mesh(vertices, indices);
+        mesh->addTextureCoords("./resources/textures/grass.png", textureCoords);
+        mesh->addNormals(normals);
+        
+        entity = new Entity(mesh, pos, rot, glm::vec3(scale, scale, scale));
+    }
+
+    ~Terrain()
+    {
+        delete mesh;
+        delete entity;
     }
 
     glm::vec3 pos;
     glm::vec3 rot;
     float scale;
 
-    EntityRef entity;
-
-    std::vector<GLfloat> vertices;
-    GLuint VAO;
+    Entity* entity;
+    Mesh* mesh;
 
     void Draw(Shader* shader)
     {
         //glEnable(GL_CULL_FACE);
         //glCullFace(GL_BACK);
 
-        glBindVertexArray(entity->getMesh()->getVAO());
+        glBindVertexArray(entity->getMesh()->VAO);
 
         glm::mat4x4 transformationMatrix = Math::createTransformationMatrix(entity->getPosition(), entity->getRotation(), entity->getScale());
         shader->loadTransformationMatrix(transformationMatrix);
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, entity->getMesh()->getTexture());
+        glBindTexture(GL_TEXTURE_2D, entity->getMesh()->TextureID);
 
         glDrawElements(GL_TRIANGLES, entity->getMesh()->getVertexCount(), GL_UNSIGNED_INT, 0);
 

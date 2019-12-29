@@ -156,7 +156,9 @@ void Shader::loadTransformationMatrix(glm::mat4x4 matrix)
 
 void Shader::loadProjectionMatrix(glm::mat4x4 matrix)
 {
+    Bind();
     loadMatrix(m_location_projectMatrix, matrix);
+    Unbind();
 }
 
 void Shader::loadViewMatrix(Camera* camera)

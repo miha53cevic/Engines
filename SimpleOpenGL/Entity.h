@@ -5,30 +5,41 @@
 class Entity
 {
 public:
-    Entity(MeshRef mesh, glm::vec3 position, glm::vec3 rotation, float scale);
-    Entity(std::string obj_path, std::string texture_path, glm::vec3 position, glm::vec3 rotation, float scale);
+    Entity(Mesh* mesh, glm::vec3 position = {0,0,0}, glm::vec3 rotation = { 0,0,0 }, glm::vec3 scale = { 1,1,1 })
+    {
+        m_mesh     = mesh;
+        m_position = position;
+        m_rotation = rotation;
+        m_scale    = scale;
+    }
 
-    void Move(float dx, float dy, float dz);
-    void Rotate(float dx, float dy, float dz);
+    void Move(float dx, float dy, float dz)
+    {
+        m_position.x += dx;
+        m_position.y += dy;
+        m_position.z += dz;
+    }
 
-    MeshRef& getMesh();
-    glm::vec3 getPosition();
-    glm::vec3 getRotation();
-    float getScale();
+    void Rotate(float dx, float dy, float dz)
+    {
+        m_rotation.x += dx;
+        m_rotation.y += dy;
+        m_rotation.z += dz;
+    }
 
-    void setMesh(MeshRef mesh);
-    void setPosition(glm::vec3 position);
-    void setRotation(glm::vec3 rotation);
-    void setScale(float scale);
+    void setPosition(glm::vec3 position) { m_position = position; }
+    void setRotation(glm::vec3 rotation) { m_rotation = rotation; }
+    void setScale(glm::vec3 scale)       { m_scale = scale;       }
+
+    Mesh* getMesh()         { return m_mesh;     }
+    glm::vec3 getPosition() { return m_position; }
+    glm::vec3 getRotation() { return m_rotation; }
+    glm::vec3 getScale()    { return m_scale;    }
 
 private:
-    MeshRef m_mesh;
+    Mesh* m_mesh;
     glm::vec3 m_position;
     glm::vec3 m_rotation;
-    float m_scale;
-
-    void loadOBJ(std::string obj_path, std::string texture_path);
+    glm::vec3 m_scale;
 };
-
-typedef std::unique_ptr<Entity> EntityRef;
 

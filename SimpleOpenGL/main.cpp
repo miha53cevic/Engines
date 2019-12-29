@@ -1,52 +1,63 @@
 #include "SimpleOpenGL.h"
-
 #include "Static_Shader.h"
-#include "Entity.h"
 #include "Renderer.h"
-#include "Light.h"
-
 #include "Terrain.h"
+#include "Entity.h"
+#include "Camera.h"
 
-class OpenGL : public SimpleOpenGL
+class App : public SimpleOpenGL
 {
 public:
-    OpenGL()
+    App()
     {
+        bWireframeMode = false;
+    }
+
+    ~App()
+    {
+        delete renderer;
+        delete mesh;
+        delete entity;
     }
 
 private:
-    // Napomena: Nemoj koristiti prazne Constructore jer se onda zove deconstructor nakon kaj se doda
-    // Zato su bolji std::unique_ptr<>() jer se oni brisu samo kada se glavni objekt brise
-    // Ali se zato moraju podaci prebaciti preko std::move()
-    EntityRef entity;
-    Static_ShaderRef shaderProgram;
-    RendererRef renderer;
-    CameraRef camera;
-    Light light;
+    Static_Shader shader;
+    Renderer* renderer;
+    Mesh* mesh;
+    Entity* entity;
+    Entity* entity1;
+    Camera camera;
     Terrain* terrain;
+
+    bool bWireframeMode;
 
 protected:
     void Event(sf::Event& e) override
     {
+        if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Tab)
+        {
+            EnableWireframe(bWireframeMode);
+            bWireframeMode = !bWireframeMode;
+        }
     }
 
+protected:
     bool OnUserCreate() override
     {
-        EnableFPSCounter(true);
         EnableVSync(true);
+        EnableFPSCounter(true);
 
-        // Create light source
-        light.setPosition(glm::vec3(0, 100, 0));
-        light.setColour(glm::vec3(1, 1, 1));
+        renderer = new Renderer(glm::vec2(ScreenWidth(), ScreenHeight()));
 
-        entity = std::make_unique<Entity>("obj/Cube", "tex/blank.png", glm::vec3(0, 0, -25.0f), glm::vec3(0, 0, 0), 1);
+        shader.createProgram("./shaders/static_shader");
+        shader.loadProjectionMatrix(renderer->getProjectionMatrix());
 
-        shaderProgram = std::make_unique<Static_Shader>();
-        shaderProgram->createProgram("shaders/texture_shader");
+        mesh = new Mesh("./resources/obj/cube.obj", "./resources/textures/cube.png");
+        entity = new Entity(mesh);
+        entity->setPosition({ 0, 0, -5 });
 
-        renderer = std::make_unique<Renderer>(glm::vec2(ScreenWidth(), ScreenHeight()), shaderProgram);
-
-        camera = std::make_unique<Camera>();
+        entity1 = new Entity(mesh);
+        entity1->setPosition({ -5, 0, -5 });
 
         terrain = new Terrain();
 
@@ -55,29 +66,28 @@ protected:
 
     bool OnUserUpdate(sf::Time elapsed) override
     {
-        //entity->Rotate(0, -100 * elapsed.asSeconds(), 0);
+        camera.Update(elapsed, 10);
 
-        camera->Update(elapsed, 10.0f);
+        shader.Bind();
 
-        shaderProgram->Bind();
-        shaderProgram->loadLight(light);
-        shaderProgram->loadViewMatrix(camera.get());
-        renderer->Render(entity, shaderProgram.get());
-        terrain->Draw(shaderProgram.get());
+        entity->Rotate(0, 1, 1);
+        shader.loadViewMatrix(&camera);
+        renderer->Render(entity, &shader);
+        renderer->Render(entity1, &shader);
 
-        shaderProgram->Unbind();
+        terrain->Draw(&shader);
+
+        shader.Unbind();
 
         return true;
     }
-
-private:
 };
 
 int main()
 {
-    OpenGL app;
-    app.setupWindow({ 1280, 720 }, "OpenGL");
+    App app;
+    app.setupWindow(sf::Vector2u(1280, 720), "Yet another OpenGL App");
     app.start();
 
-    return 0;
+	return 0;
 }

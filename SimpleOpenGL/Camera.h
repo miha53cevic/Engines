@@ -82,5 +82,3 @@ private:
 
     sf::Vector2i lastPos;
 };
-
-typedef std::unique_ptr<Camera> CameraRef;
