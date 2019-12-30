@@ -58,8 +58,13 @@ public:
 
     ~Terrain()
     {
+        printf("Terrain: Deconstructor!\n");
+
         delete mesh;
         delete entity;
+
+        mesh = nullptr;
+        entity = nullptr;
     }
 
     glm::vec3 pos;

@@ -10,26 +10,46 @@ class App : public SimpleOpenGL
 public:
     App()
     {
-        bWireframeMode = false;
+        bWireframeMode = true;
     }
 
     ~App()
     {
         delete renderer;
         delete mesh;
-        delete entity;
+        delete terrain;
+
+        renderer = nullptr;
+        mesh = nullptr;
+        terrain = nullptr;
     }
 
 private:
     Static_Shader shader;
+    Camera        camera;
+
     Renderer* renderer;
-    Mesh* mesh;
-    Entity* entity;
-    Entity* entity1;
-    Camera camera;
-    Terrain* terrain;
+    Mesh*     mesh;
+    Terrain*  terrain;
+
+    std::map<Mesh*, std::vector<Entity>> entity_map;
 
     bool bWireframeMode;
+
+    void processEntity(Mesh* m, Entity e)
+    {
+        if (entity_map.find(m) == entity_map.end())
+        {
+            // Add the mesh to the collection
+            entity_map.insert(std::make_pair(m, std::vector<Entity>()));
+            entity_map.at(m).push_back(e);
+        }
+        else
+        {
+            // If it exists just push back the entity
+            entity_map.at(m).push_back(e);
+        }
+    }
 
 protected:
     void Event(sf::Event& e) override
@@ -53,11 +73,11 @@ protected:
         shader.loadProjectionMatrix(renderer->getProjectionMatrix());
 
         mesh = new Mesh("./resources/obj/cube.obj", "./resources/textures/cube.png");
-        entity = new Entity(mesh);
-        entity->setPosition({ 0, 0, -5 });
 
-        entity1 = new Entity(mesh);
-        entity1->setPosition({ -5, 0, -5 });
+        for (int i = 0; i < 10; i++)
+        {
+            processEntity(mesh, Entity(mesh, { Math::fRandom(-100, 100), Math::fRandom(-100, 100), -Math::fRandom(5, 105) }));
+        }
 
         terrain = new Terrain();
 
@@ -70,10 +90,11 @@ protected:
 
         shader.Bind();
 
-        entity->Rotate(0, 1, 1);
+        for (auto& entity : entity_map.at(mesh))
+            entity.Rotate(0, 1, 1);
+
         shader.loadViewMatrix(&camera);
-        renderer->Render(entity, &shader);
-        renderer->Render(entity1, &shader);
+        renderer->Render(entity_map, &shader);
 
         terrain->Draw(&shader);
 

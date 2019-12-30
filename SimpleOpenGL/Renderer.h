@@ -41,6 +41,34 @@ public:
         glBindVertexArray(0);
     }
 
+    void Render(std::map<Mesh*, std::vector<Entity>> entities, Shader* shader)
+    {
+        for (auto& element : entities)
+        {
+            glBindVertexArray(element.first->VAO);
+
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, element.first->TextureID);
+
+            for (auto& entity : element.second)
+            {
+                glm::mat4x4 transformationMatrix = Math::createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale());
+                shader->loadTransformationMatrix(transformationMatrix);
+
+                glDrawElements(GL_TRIANGLES, element.first->getVertexCount(), GL_UNSIGNED_INT, 0);
+            }
+
+            glBindVertexArray(0);
+        }
+    }
+
+    void EnableCulling()
+    {
+        // Don't draw faces that the camera can not see
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
+    }
+
 private:
     float m_FOV;
     float m_NEAR_PLANE;
