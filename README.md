@@ -6,5 +6,5 @@ A few sort of engines made for simple game development
 - mihaSimpleSFML
 - WitherEngine
 
-### C++ / SFML / OpenGL / Glew / GLM
+### C++ / SFML / OpenGL / Glad / GLM
 - SimpleOpenGL
