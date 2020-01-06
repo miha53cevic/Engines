@@ -8,7 +8,7 @@ Window::Window(int width, int height, std::string title)
     sf::ContextSettings settings;
     settings.depthBits = 24;    // Add this to make the depth buffer work
     settings.stencilBits = 8;
-    settings.antialiasingLevel = 4;
+    //settings.antialiasingLevel = 4;
 
     m_window.create(sf::VideoMode(width, height), title, sf::Style::Default, settings);
 

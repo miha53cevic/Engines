@@ -12,6 +12,8 @@ gl::Shader::Shader()
 
 gl::Shader::~Shader()
 {
+    printf("Shader: Deconstructor called");
+
     for (unsigned int i = 0; i < NUM_SHADERS; i++)
     {
         glDetachShader(m_program, m_shaders[i]);
@@ -79,6 +81,11 @@ int gl::Shader::getUniformLocation(std::string uniform_name)
 void gl::Shader::loadFloat(int location, float value)
 {
     glUniform1f(location, value);
+}
+
+void gl::Shader::loadVector2(int location, glm::vec2 vector)
+{
+    glUniform2f(location, vector.x, vector.y);
 }
 
 void gl::Shader::loadVector3(int location, glm::vec3 vector)

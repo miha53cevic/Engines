@@ -10,7 +10,8 @@ namespace gl
         ElementArrayBuffer();
         ~ElementArrayBuffer();
 
-        void setData(std::vector<GLuint> indicies, int DrawMode = GL_STATIC_DRAW);
+        void setData   (const std::vector<GLuint>& indicies, int DrawMode = GL_STATIC_DRAW);
+        void setSubData(const std::vector<GLuint>& indicies);
 
         GLuint EBO;
         GLuint size;

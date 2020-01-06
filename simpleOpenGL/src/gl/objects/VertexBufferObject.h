@@ -11,6 +11,7 @@ namespace gl
 
         GLuint VBO;
 
-        void setData(std::vector<GLfloat> data, int attributeID, int size, int DrawingMode = GL_STATIC_DRAW);
+        void setData   (const std::vector<GLfloat>& data, int attributeID, int size, int DrawMode = GL_STATIC_DRAW);
+        void setSubData(const std::vector<GLfloat>& data);
     };
 };
