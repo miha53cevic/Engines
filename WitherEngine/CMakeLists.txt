@@ -25,7 +25,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED 17)
 # Add dependencies if build succeeds
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/dependencies/ $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+                       ${CMAKE_SOURCE_DIR}/dependencies/ $<TARGET_FILE_DIR:${PROJECT_NAME}>/dependencies)
 
 # Find SFML
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
