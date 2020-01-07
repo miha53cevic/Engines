@@ -25,7 +25,7 @@ add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 set(CMAKE_CXX_STANDARD_REQUIRED 17)
 
 # Use static SFML
-set(SFML_STATIC_LIBRARIES TRUE)
+# set(SFML_STATIC_LIBRARIES TRUE)
 
 # Add dependencies if build succeeds
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
@@ -44,8 +44,7 @@ include_directories(
 	"${CMAKE_SOURCE_DIR}/libs/GL3.3_Core/include"
 )
 
-# Link OpenGL and GLAD
-target_link_libraries(${PROJECT_NAME} opengl32 GLAD)
+target_link_libraries(${PROJECT_NAME} OpenGL::GL GLAD ${CMAKE_DL_LIBS})
 
 # Find SFML
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
