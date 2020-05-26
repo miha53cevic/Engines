@@ -18,4 +18,4 @@ app: $(obj)
 	build/./app.exe
 
 .Phony clean:
-	rm -f ./*.o
+	rm -f $(obj)

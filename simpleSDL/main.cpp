@@ -1,6 +1,6 @@
 #include "simpleSDL.h"
 
-class demo : public simpleSDL
+class demo : public ssdl::simpleSDL
 {
 public:
 	demo() {}
