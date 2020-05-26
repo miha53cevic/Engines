@@ -18,7 +18,6 @@ private:
 	{
 		Clear();
 		drawRect(ScreenWidth() / 2 - 100, ScreenHeight() / 2 - 100, 200, 200);
-		
 		return true;
 	}
 };
