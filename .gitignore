@@ -5,6 +5,7 @@
 
 simpleSDL/SDL2
 simpleSDL/build
+.vscode
 
 # User-specific files
 *.suo

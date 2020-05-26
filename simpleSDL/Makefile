@@ -16,6 +16,7 @@ obj = $(src:.cpp=.o)
 app: $(obj)
 	$(CXX) $(CXXFLAGS) -o build/$@ $^ $(LIB) $(LIBS)
 	build/./app.exe
+	rm -f $(obj)
 
 .Phony clean:
 	rm -f $(obj)
