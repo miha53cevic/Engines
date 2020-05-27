@@ -242,6 +242,18 @@ namespace ssdl
             SDL_RenderCopy(m_renderer, texture, srcRect, dsRect);
         }
 
+        bool rectContains(ivec2 leftUpperCorner, ivec2 size, ivec2 point)
+        {
+            ivec2 rightDownCorner = { leftUpperCorner.x + size.x, leftUpperCorner.y + size.y };
+            if (point.x <= rightDownCorner.x && 
+                point.x >= leftUpperCorner.x &&
+                point.y <= rightDownCorner.y &&
+                point.y >= leftUpperCorner.y
+            ) return true;
+
+            return false;
+        }
+
         void Clear(int r = 0, int g = 0, int b = 0, int a = 255)
         {
             SDL_SetRenderDrawColor(m_renderer, r, g, b, a);
