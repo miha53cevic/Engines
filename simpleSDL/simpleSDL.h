@@ -9,31 +9,31 @@
 class demo : public ssdl::simpleSDL
 {
 public:
-	demo() {}
+    demo() {}
 
 private:
-	virtual void Event(const SDL_Event &e)
-	{}
+    virtual void Event(const SDL_Event &e)
+    {}
 
-	virtual bool Setup()
-	{
-		return true;
-	}
+    virtual bool Setup()
+    {
+        return true;
+    }
 
-	virtual bool Loop(float elapsed)
-	{
-		Clear();
-		drawRect(ScreenWidth() / 2 - 100, ScreenHeight() / 2 - 100, 200, 200);
-		return true;
-	}
+    virtual bool Loop(float elapsed)
+    {
+        Clear();
+        drawRect(ScreenWidth() / 2 - 100, ScreenHeight() / 2 - 100, 200, 200);
+        return true;
+    }
 };
 
 int main(int argc, char* argv[])
 {
-	demo app;
-	app.Construct("Demo app", 1280, 720);
-	app.Start();
-	return 0;
+    demo app;
+    app.Construct("Demo app", 1280, 720);
+    app.Start();
+    return 0;
 }
 
 */
@@ -131,8 +131,8 @@ namespace ssdl
         T x, y;
     };
 
-    typedef vec2<int> 			ivec2;
-    typedef vec2<unsigned int> 	uvec2;
+    typedef vec2<int>           ivec2;
+    typedef vec2<unsigned int>  uvec2;
     typedef vec2<float> 		fvec2;
     typedef vec2<double> 		dvec2;
 
