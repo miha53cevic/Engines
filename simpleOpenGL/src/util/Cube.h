@@ -7,6 +7,7 @@ namespace Cube
     struct Face
     {
         std::vector<GLfloat> verticies;
+		std::vector<GLfloat> normals;
 
         // Indicies and textureCoords of each face are the same
         std::vector<GLuint>  indicies = {
@@ -21,7 +22,7 @@ namespace Cube
         };
     };
 
-    static enum class CubeFace
+    enum class CubeFace
     {
         TOP, BOTTOM, LEFT, RIGHT, BACK, FRONT
     };
@@ -29,14 +30,17 @@ namespace Cube
     static Face getCubeFace(CubeFace face)
     {
         if (face == CubeFace::BACK)
-            return Face {
-                {
+            return Face{
+                {   // Verticies
                     1,1,0,
                     1,0,0,
                     0,0,0,
                     0,1,0
                 },
-            };
+                {   // Normals
+                    0,0,-1
+                }
+        };
         else if (face == CubeFace::FRONT)
             return Face{
                 {
@@ -44,8 +48,11 @@ namespace Cube
                     0,0,1,
                     1,0,1,
                     1,1,1
+                },
+                {
+                    0,0,1
                 }
-            };
+        };
         else if (face == CubeFace::RIGHT)
             return Face{
                 {
@@ -53,8 +60,11 @@ namespace Cube
                     1,0,1,
                     1,0,0,
                     1,1,0
+                },
+                {
+                    1,0,0
                 }
-            };
+        };
         else if (face == CubeFace::LEFT)
             return Face{
                 {
@@ -62,8 +72,11 @@ namespace Cube
                     0,0,0,
                     0,0,1,
                     0,1,1
+                },
+                {
+                    -1,0,0
                 }
-            };
+        };
         else if (face == CubeFace::TOP)
             return Face{
                 {
@@ -71,8 +84,11 @@ namespace Cube
                     1,1,1,
                     1,1,0,
                     0,1,0
+                },
+                {
+                    0,1,0
                 }
-            };
+        };
         else if (face == CubeFace::BOTTOM)
             return Face{
                 {
@@ -80,8 +96,11 @@ namespace Cube
                     0,0,0,
                     1,0,0,
                     1,0,1
+                },
+                {
+                    0,-1,0
                 }
-            };
+        };
     }
 
     static std::vector<GLfloat> verticies = {
@@ -152,7 +171,7 @@ namespace Cube
          0,1,
          1,1,
          1,0
-     };
+    };
 
     static std::vector<GLuint> indicies = {
          0,1,3,
@@ -167,5 +186,5 @@ namespace Cube
          19,17,18,
          20,21,23,
          23,21,22
-     };
+    };
 };

@@ -24,9 +24,6 @@ add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 # Use C++17 standard 
 set(CMAKE_CXX_STANDARD_REQUIRED 17)
 
-# Use static SFML
-# set(SFML_STATIC_LIBRARIES TRUE)
-
 # Add dependencies if build succeeds
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy_directory
