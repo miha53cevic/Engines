@@ -25,5 +25,7 @@ struct Entity
     void draw(int mode = GL_TRIANGLES, int type = GL_UNSIGNED_INT, const void* indicies = 0);
 
     std::vector<VBORef> VBOs;
+
+    void loadObj(std::string path);
 };
 

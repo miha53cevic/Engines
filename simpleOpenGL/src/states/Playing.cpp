@@ -20,11 +20,12 @@ void Playing::init()
     m_shader.setUniformLocation("projectionMatrix");
     m_shader.setUniformLocation("viewMatrix");
 
-    m_texture.loadTexture("deps/Resources/textures/tex1.png");
+    m_texture.loadTexture("deps/textures/tex1.png");
 
     m_cube.setVBO(Cube::verticies, 0, 3);
     m_cube.setVBO(Cube::textureCoords, 1, 2);
     m_cube.setEBO(Cube::indicies);
+    //m_cube.loadObj("deps/obj/cube.obj");
 
     m_cube.position = glm::vec3(0, 0, -3);
 

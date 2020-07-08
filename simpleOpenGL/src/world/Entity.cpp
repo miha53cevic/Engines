@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include  "../util/OBJ_Loader.h"
 
 Entity::Entity()
     : position(0, 0, 0)
@@ -52,4 +53,36 @@ void Entity::draw(int mode, int type, const void * indicies)
     VAO.Bind();
     glDrawElements(mode, EBO.size, type, indicies);
     VAO.Unbind();
+}
+
+void Entity::loadObj(std::string path)
+{
+    objl::Loader loader;
+    if (!loader.LoadFile(path))
+    {
+        printf("Error: Could not load OBJ");
+    }
+    auto mesh = loader.LoadedMeshes[0];
+    
+    std::vector<float> verticies;
+    std::vector<float> textureCoords;
+    std::vector<float> normals;
+    for (int i = 0; i < mesh.Vertices.size(); i++)
+    {
+        verticies.push_back(mesh.Vertices[i].Position.X);
+        verticies.push_back(mesh.Vertices[i].Position.Y);
+        verticies.push_back(mesh.Vertices[i].Position.Z);
+
+        textureCoords.push_back(mesh.Vertices[i].TextureCoordinate.X);
+        textureCoords.push_back(mesh.Vertices[i].TextureCoordinate.Y);
+
+        normals.push_back(mesh.Vertices[i].Normal.X);
+        normals.push_back(mesh.Vertices[i].Normal.Y);
+        normals.push_back(mesh.Vertices[i].Normal.Z);
+    }
+
+    // Load the VBOs
+    setVBO(verticies, 0, 3, GL_STATIC_DRAW);
+    setVBO(textureCoords, 1, 2, GL_STATIC_DRAW);
+    setEBO(mesh.Indices, GL_STATIC_DRAW);
 }
