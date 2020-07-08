@@ -44,17 +44,21 @@ void Playing::Update(sf::Time elapsed)
 
 void Playing::Draw()
 {
+    // Activate the shader first
     m_shader.Bind();
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, m_texture.texture);
+    // Activate and bind the texture before use
+    m_texture.activateAndBind();
 
+    m_cube.rotation.x += 0.01;
+    m_cube.rotation.y += 0.01;
+
+    // Load the matrices
     m_shader.loadMatrix(m_shader.getUniformLocation("viewMatrix"), Math::createViewMatrix(&m_camera));
-
-    m_cube.VAO.Bind();
     m_shader.loadMatrix(m_shader.getUniformLocation("transformationMatrix"), Math::createTransformationMatrix(&m_cube));
-    glDrawElements(GL_TRIANGLES, m_cube.EBO.size, GL_UNSIGNED_INT, 0);
-    m_cube.VAO.Unbind();
+    
+    // Draw the object
+    m_cube.draw();
 
     m_shader.Unbind();
 }

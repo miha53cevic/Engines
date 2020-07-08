@@ -40,3 +40,9 @@ void gl::Texture::loadTexture(std::string texture_path)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     }
 }
+
+void gl::Texture::activateAndBind()
+{
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
+}

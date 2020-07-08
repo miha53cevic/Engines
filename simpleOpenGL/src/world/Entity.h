@@ -22,6 +22,8 @@ struct Entity
     void updateEBO(const std::vector<GLuint>& indicies);
     void updateVBO(const std::vector<GLfloat>& data, int index);
 
+    void draw(int mode = GL_TRIANGLES, int type = GL_UNSIGNED_INT, const void* indicies = 0);
+
     std::vector<VBORef> VBOs;
 };
 

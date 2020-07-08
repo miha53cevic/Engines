@@ -46,3 +46,10 @@ void Entity::updateVBO(const std::vector<GLfloat>& data, int index)
     VBOs[index]->setSubData(data);
     VAO.Unbind();
 }
+
+void Entity::draw(int mode, int type, const void * indicies)
+{
+    VAO.Bind();
+    glDrawElements(mode, EBO.size, type, indicies);
+    VAO.Unbind();
+}

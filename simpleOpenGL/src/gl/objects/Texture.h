@@ -13,6 +13,7 @@ namespace gl
         ~Texture();
 
         void loadTexture(std::string texture_path);
+        void activateAndBind();
 
         GLuint texture;
     };
