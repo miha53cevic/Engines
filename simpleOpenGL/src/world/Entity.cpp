@@ -84,5 +84,6 @@ void Entity::loadObj(std::string path)
     // Load the VBOs
     setVBO(verticies, 0, 3, GL_STATIC_DRAW);
     setVBO(textureCoords, 1, 2, GL_STATIC_DRAW);
+    setVBO(normals, 2, 3, GL_STATIC_DRAW);
     setEBO(mesh.Indices, GL_STATIC_DRAW);
 }
