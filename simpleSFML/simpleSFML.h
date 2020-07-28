@@ -51,6 +51,9 @@ int main()
 #include <SFML/Window.hpp>
 #include <string>
 #include <random>
+#include <cstdint>
+#include <iostream>
+#include <vector>
 
 namespace ssf 
 {
@@ -191,10 +194,6 @@ namespace ssf
 	Matrix Library Module
 *///////////////////////////////
 
-
-#include <iostream>
-#include <vector>
-
 namespace matrix
 {
     template<typename T>
@@ -305,7 +304,6 @@ namespace matrix
 /*//////////////////////////////
 	  Data Types Module
 *///////////////////////////////
-#include <cstdint>
 
 typedef uint8_t  u8;
 typedef uint16_t u16;
