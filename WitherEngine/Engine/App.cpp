@@ -1,5 +1,4 @@
 #include "App.h"
-#include "../game_states/Playing.h"
 
 we::App::App()
 {
@@ -23,8 +22,6 @@ void we::App::Run()
 	m_isRunning = true;
 
 	// add starting state here
-    m_stateMachine.AddState(std::make_unique<Playing>(this));
-    m_stateMachine.ProcessStateChanges();
 
 	while (m_isRunning)
 	{
@@ -33,7 +30,7 @@ void we::App::Run()
 		// Update state
 		if (!m_stateMachine.isEmpty())
 		{
-			m_stateMachine.GetActiveState()->Update	(m_elapsed.asSeconds());
+			m_stateMachine.GetActiveState()->Update(m_elapsed.asSeconds());
 		}
 
 		// Draw state
@@ -54,7 +51,7 @@ void we::App::Run()
 int we::App::ScreenWidth()                      { return m_screenSize.x; }
 int we::App::ScreenHeight()                     { return m_screenSize.y; }
 
-sf::RenderWindow &we::App::getWindow()          { return m_window; }
+sf::RenderWindow &we::App::getWindow()          { return m_window; 		 }
 we::StateMachine &we::App::getStateMachine()    { return m_stateMachine; }
 
 void we::App::setVSync(bool VSync)              { m_VSync = VSync;       }
