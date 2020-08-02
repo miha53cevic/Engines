@@ -3,7 +3,7 @@
 int main()
 {
     we::App app;
-    app.CreateWindow(1280, 720, "TopDome");
+    app.CreateWindow(1280, 720, "Test Application");
     app.Run();
 
 	return 0;
