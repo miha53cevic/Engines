@@ -1,10 +1,10 @@
-#include "Engine/App.h"
+#include "engine/App.h"
 
 int main()
 {
-	we::App demo;
-	demo.CreateWindow(1280, 720, "demo app");
-	demo.Run();
+	we::App app;
+    app.CreateWindow(1280, 720, "TopDome");
+    app.Run();
 
 	return 0;
 }

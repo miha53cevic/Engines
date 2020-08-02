@@ -9,15 +9,16 @@ project(WitherEngine)
 # Put executable inside of bin folder
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# Set source .cpp files
-set(SOURCES 
-    main.cpp
-    Engine/App.cpp
-    GUI/TextBox.cpp
-    StateMachine/StateMachine.cpp
-)
+# Set source files
+file(GLOB_RECURSE SOURCE_FILES 
+	${CMAKE_SOURCE_DIR}/src/*.cpp)
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+# Add header files
+file(GLOB_RECURSE HEADER_FILES 
+	${CMAKE_SOURCE_DIR}/src/*.h
+	${CMAKE_SOURCE_DIR}/src/*.hpp)
+
+add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
 # Use C++17 standard 
 set(CMAKE_CXX_STANDARD_REQUIRED 17)

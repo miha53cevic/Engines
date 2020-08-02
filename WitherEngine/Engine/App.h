@@ -3,7 +3,7 @@
 #include <SFML/Window.hpp>
 #include <string>
 
-#include "../StateMachine/StateMachine.h"
+#include "../modules/states/StateMachine.h"
 
 namespace we
 {

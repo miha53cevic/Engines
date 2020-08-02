@@ -1,5 +1,6 @@
 #include "TextBox.h"
-#include "../Engine/App.h"
+
+#include "../../engine/App.h"
 
 we::TextBox::TextBox(App* app)
     : m_app(app)
@@ -67,6 +68,4 @@ void we::TextBox::centerText()
 {
     sf::FloatRect textRect = m_text.getLocalBounds();
     m_text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-
-    m_text.setPosition(m_app->ScreenWidth() / 2, m_app->ScreenHeight() / 2);
 }

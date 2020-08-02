@@ -64,6 +64,11 @@ bool we::StateMachine::isEmpty()
 	return m_states.empty();
 }
 
+void we::StateMachine::RemoveStateBack()
+{
+    m_states.pop_back();
+}
+
 we::StateRef& we::StateMachine::GetActiveState()
 {
 	return m_states.front();

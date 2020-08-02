@@ -1,4 +1,5 @@
 #include "App.h"
+#include "../game_states/Playing.h"
 
 we::App::App()
 {
@@ -21,7 +22,9 @@ void we::App::Run()
 {
 	m_isRunning = true;
 
-	// TODO add starting state here
+	// add starting state here
+    m_stateMachine.AddState(std::make_unique<Playing>(this));
+    m_stateMachine.ProcessStateChanges();
 
 	while (m_isRunning)
 	{

@@ -1,5 +1,5 @@
 #pragma once
-#include "../ResourceManager/ResourceManager.h"
+#include "../resource/ResourceManager.h"
 
 namespace we
 {
@@ -23,10 +23,10 @@ namespace we
 
         sf::Text &getText           ();
 
+        void centerText();
+
     private:
         sf::Text    m_text;
         App*        m_app;
-
-        void centerText();
     };
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include <deque>
 
-#include "../States/State.h"
+#include "State.h"
 
 namespace we
 {
@@ -19,6 +19,8 @@ namespace we
 		void ProcessStateChanges();
 
 		bool isEmpty();
+
+        void RemoveStateBack();
 
 		StateRef &GetActiveState();
 

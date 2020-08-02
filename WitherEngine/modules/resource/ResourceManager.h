@@ -15,7 +15,7 @@ namespace we
         {
             // Try to load textures
             std::ifstream config;
-            config.open("textures.cfg");
+            config.open("dependencies/textures.cfg");
 
             if (config.fail())
                 std::cout << "Could not open textures.cfg\n";
@@ -42,7 +42,7 @@ namespace we
             std::cout << "Loaded " << m_textures.size() << " texture(s)\n";
 
             // Load font
-            if (!m_font.loadFromFile("fonts/arial.ttf"))
+            if (!m_font.loadFromFile("dependencies/fonts/arial.ttf"))
             {
                 // Error
             }
