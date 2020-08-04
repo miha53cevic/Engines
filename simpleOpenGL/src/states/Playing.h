@@ -1,7 +1,7 @@
 #pragma once
 #include "State.h"
 
-#include "../gl/loadGL.h"
+#include "../gl/glObjects.h"
 #include "../world/Entity.h"
 #include "../util/Camera.h"
 

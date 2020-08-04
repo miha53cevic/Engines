@@ -1,5 +1,5 @@
 #pragma once
-#include "../gl/loadGL.h"
+#include "../gl/glObjects.h"
 #include <memory>
 
 typedef std::unique_ptr<gl::VertexBufferObject> VBORef;
